@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Screenshot!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 12px/1.5 sans-serif; }
+    .button {
+        margin: 1em;
+        text-align: center;
+    }
+    .button a {
+        padding: 1em;
+        border: 1px solid #1e7e34;
+        background-color: #8fd19e;
+        color: #0a0a0a;
+        text-decoration: none;
+    }
+    .button a:visited {
+        color: #0a0a0a;
+    }
+</style>
+
+<div class="example-wrapper">
+
+    <div>
+        <p>{{ message }}</p>
+    </div>
+
+    <div class="button">
+        <a href="{{ path('create_screenshot') }}">Take new screenshot</a>
+    </div>
+
+</div>
+{% endblock %}

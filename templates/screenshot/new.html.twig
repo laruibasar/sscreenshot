@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New screenshot{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 12px/1.5 sans-serif; }
+    label {display: inline-block; min-width: 100px; }
+    input {min-width: 300px; }
+    #screenshot {
+        display: flex;
+        flex-flow: column;
+    }
+
+    #screenshot div {
+        margin-bottom: .8em;
+    }
+</style>
+
+<div class="example-wrapper">
+    <h1>New screenshot</h1>
+
+    <hr/>
+    <div>
+        <div class="button">
+            <a href="{{ path('screenshot') }}">Return to list</a>
+        </div>
+    </div>
+    <div class="example-form">
+        {{ form(form) }}
+    </div>
+</div>
+{% endblock %}

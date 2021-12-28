@@ -1,0 +1,114 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Screenshot!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 12px/1.5 sans-serif; }
+    .button {
+        margin: 1em;
+        text-align: center;
+    }
+    .button a {
+        padding: 1em;
+        border: 1px solid #1e7e34;
+        background-color: #8fd19e;
+        color: #0a0a0a;
+        text-decoration: none;
+    }
+    .button a:visited {
+        color: #0a0a0a;
+    }
+
+    .modal-div {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1000;
+        background-color: #fff;
+        overflow: scroll;
+    }
+
+    .modal-header {
+        position: fixed;
+        top: 25px;
+        right: 50px;
+    }
+
+    .modal-body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 1em;
+    }
+
+    .hidden {
+        visibility: hidden;
+    }
+
+    .show {
+        visibility: visible;
+    }
+</style>
+
+    <div class="modal-div hidden">
+        <div class="modal-header">
+            <button onclick="closeModal();">X</button>
+        </div>
+        <div class="modal-body">
+            <div class="modal-content">
+                <img class="modal-img" src=""/>
+                <h4 class="modal-error"></h4>
+            </div>
+        </div>
+    </div>
+
+<div class="example-wrapper">
+    <h1>List of screenshots</h1>
+
+    <hr/>
+
+    <div class="button">
+        <a href="{{ path('create_screenshot') }}">Take new screenshot</a>
+    </div>
+
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <th></th><th>URL</th><th>Date</th><th>Parameters</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for screenshot in screenshots %}
+                <tr>
+                    <td>
+                    {% if screenshot.success == true %}
+                        &#x2705;
+                    {% else %}
+                        &#x274C;
+                    {%  endif %}
+                    </td>
+                    <td>
+                        {% if screenshot.success == true %}
+                        <a class="shot" href="{{ path('show_screenshot', {id: screenshot.id}) }}">{{ screenshot.url|e('url') }}</a>
+
+                        {% else %}
+                        {{ screenshot.url|e('url') }}
+                        {% endif %}
+                    </td>
+                    <td>{{ screenshot.datetime }}</td>
+                    <td>
+                        {% for param, value in screenshot.params %}
+                        {{ param }}={{ value }}&nbsp;
+                        {% endfor %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
